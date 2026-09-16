@@ -1,0 +1,12 @@
+[
+  { "id": 1, "name": "Knäböj", "muscleGroup": "legs", "equipment": "barbell", "difficulty": "intermediate", "description": "Grundövning för ben och säte.", "sets": 4, "reps": 8 },
+  { "id": 2, "name": "Bänkpress", "muscleGroup": "chest", "equipment": "barbell", "difficulty": "intermediate", "description": "Ligg på bänk, sänk skivstången mot bröstet och pressa upp igen.", "sets": 4, "reps": 8 },
+  { "id": 3, "name": "Marklyft", "muscleGroup": "back", "equipment": "barbell", "difficulty": "advanced", "description": "Lyft skivstången från golvet till stående position med rak rygg.", "sets": 3, "reps": 5 },
+  { "id": 4, "name": "Armhävningar", "muscleGroup": "chest", "equipment": "bodyweight", "difficulty": "beginner", "description": "Klassisk kroppsviktsövning för bröst, axlar och triceps.", "sets": 3, "reps": 15 },
+  { "id": 5, "name": "Axelpress", "muscleGroup": "shoulders", "equipment": "dumbbell", "difficulty": "beginner", "description": "Pressa hantlar rakt upp över axlarna.", "sets": 3, "reps": 10 },
+  { "id": 6, "name": "Bicepscurl", "muscleGroup": "arms", "equipment": "dumbbell", "difficulty": "beginner", "description": "Böj armbågen och för hanteln upp mot axeln.", "sets": 3, "reps": 12 },
+  { "id": 7, "name": "Plankan", "muscleGroup": "core", "equipment": "bodyweight", "difficulty": "beginner", "description": "Håll kroppen rak i stödposition på underarmarna.", "sets": 3, "reps": 1 },
+  { "id": 8, "name": "Utfallssteg", "muscleGroup": "legs", "equipment": "dumbbell", "difficulty": "intermediate", "description": "Ta ett stort kliv framåt och böj båda knäna till 90 grader.", "sets": 3, "reps": 12 },
+  { "id": 9, "name": "Latsdrag", "muscleGroup": "back", "equipment": "machine", "difficulty": "beginner", "description": "Dra stången nedåt mot bröstet i en kabelmaskin.", "sets": 3, "reps": 10 },
+  { "id": 10, "name": "Löpning på löpband", "muscleGroup": "cardio", "equipment": "machine", "difficulty": "beginner", "description": "Konditionsträning på löpband i valfritt tempo.", "sets": 1, "reps": 1 }
+]

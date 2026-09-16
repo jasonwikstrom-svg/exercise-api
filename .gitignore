@@ -4,3 +4,4 @@ npm-debug.log
 coverage/
 *.log
 .idea/
+src/data/exercises.json
