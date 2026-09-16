@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const SEED_FILE = path.join(__dirname, "../data/exercises.json");
+const SEED_FILE = path.join(__dirname, "../data/exercises.seed.json");
 
 function getDataFile() {
     return process.env.EXERCISE_DATA_FILE || path.join(__dirname, "exercises.json");
