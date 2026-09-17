@@ -1,5 +1,6 @@
 const express = require("express");
 const repository = require("../data/exerciseRepository");
+const { validateExercise, MUSCLE_GROUPS } = require("../utils/exerciseValidation");
 
 const router = express.Router();
 
@@ -31,7 +32,7 @@ router.get("/", (req, res, next) => {
     }
 });
 
-const { validateExercise } = require("../utils/exerciseValidation");
+
 
 router.post("/", (req, res, next) => {
     const { valid, errors, data } = validateExercise(req.body || {} )
@@ -86,7 +87,20 @@ router.delete("/:id", (req, res, next) => {
     catch (err) {
         next(err);
     }
-})
+});
 
+router.get("/muscle-group/:group", (req, res, next) => {
+    const { group } = req.params;
+    if (!MUSCLE_GROUPS.includes(group)) {
+        return res.status(400).json({ error: "Invalid muscle group" });
+    }
+    try {
+        const exercises = repository.getAll().filter((ex) => ex.muscleGroup === group);
+        res.status(200).json({ data: exercises });
+    }
+    catch (err) {
+        next(err);
+    }
+});
 
 module.exports = router;
