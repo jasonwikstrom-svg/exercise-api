@@ -4,6 +4,16 @@ const { validateExercise, MUSCLE_GROUPS, EQUIPMENT_TYPES, DIFFICULTIES } = requi
 
 const router = express.Router();
 
+function paginate(items, req) {
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 10;
+    const total = items.length;
+    const start = (page - 1) * limit;
+    const data = items.slice(start, start + limit);
+    return { data, meta: { page, limit, total } };
+    
+}
+
 router.get("/:id", (req, res, next) => {
     const id = Number(req.params.id);
     if (!Number.isInteger(id)) {
@@ -47,7 +57,8 @@ router.get("/", (req, res, next) => {
             exercises = exercises.filter(ex => ex.difficulty === difficulty);
         }
         
-        res.status(200).json({ data: exercises });
+        const { data, meta } = paginate(exercises, req);
+        res.status(200).json({ data, meta });
     }
     catch (err) {
         next(err);
@@ -118,11 +129,13 @@ router.get("/muscle-group/:group", (req, res, next) => {
     }
     try {
         const exercises = repository.getAll().filter((ex) => ex.muscleGroup === group);
-        res.status(200).json({ data: exercises });
+        const { data, meta } = paginate(exercises, req);
+        res.status(200).json({ data, meta });
     }
     catch (err) {
         next(err);
     }
 });
+
 
 module.exports = router;
