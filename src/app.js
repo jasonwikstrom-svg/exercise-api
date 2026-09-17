@@ -10,4 +10,16 @@ app.get('/health', (req, res) => {
 
 app.use("/exercises", exercisesRouter);
 
+app.use((req, res) => {
+    res.status(404).json({ error: `Resource ${req.originalUrl} not found` });
+});
+
+app.use((err, req, res, next) => {
+   const status = err.status || 500;
+   if (status >= 500) {
+       console.error(err);
+   }
+   res.status(status).json({ error: err.message || "An unexpected error occurred" });
+});
+
 module.exports = app;
