@@ -47,4 +47,17 @@ function getById(id) {
     return readAll().find((ex) => ex.id === id);
 }
 
-module.exports = { getAll, getById, SEED_FILE };
+function getNextId() {
+    return exercises.reduce((maxId, ex) => Math.max(maxId, ex.id), 0) + 1;
+}
+
+function create(data) {
+    const exercises = readAll();
+    const newExercise = { id: getNextId(), ...data };
+    exercises.push(newExercise);
+    fs.writeFileSync(getDataFile(), JSON.stringify(exercises, null, 2), "utf-8");
+    return newExercise;
+}
+
+
+module.exports = { getAll, getById, create, SEED_FILE };
