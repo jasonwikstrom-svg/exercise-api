@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --runInBand"
   },
   "keywords": [],
   "author": "",
@@ -16,5 +16,8 @@
   "devDependencies": {
     "jest": "^30.5.1",
     "supertest": "^7.2.2"
+  },
+  "jest": {
+    "setupFilesAfterEnv": ["<rootDir>/tests/setupTestData.js"]
   }
 }

@@ -71,5 +71,22 @@ router.put("/:id", (req, res, next) => {
     }
 });
 
+router.delete("/:id", (req, res, next) => {
+    const id = Number(req.params.id);
+    if (!Number.isInteger(id)) {
+        return res.status(400).json({ error: "Invalid id" });
+    }
+    try {
+        const remove = repository.remove(id);
+        if (!remove) {
+            return res.status(404).json({ error: "Exercise not found" });
+        }
+        res.status(200).json({ data: remove });
+    }
+    catch (err) {
+        next(err);
+    }
+})
+
 
 module.exports = router;

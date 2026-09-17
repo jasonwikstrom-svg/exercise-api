@@ -70,5 +70,17 @@ function update(id, data) {
     return exercises[index];
 }
 
+function remove(id) {
+    const exercises = readAll();
+    const index = exercises.findIndex((ex) => ex.id === id);
+    if (index === -1) {
+        return null;
+    }
+    const [removed] = exercises.splice(index, 1);
+    writeAll(exercises);
+    return removed;
+}
 
-module.exports = { getAll, getById, create, update, SEED_FILE };
+
+
+module.exports = { getAll, getById, create, update, remove, SEED_FILE };
