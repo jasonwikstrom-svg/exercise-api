@@ -1,6 +1,6 @@
 const express = require("express");
 const repository = require("../data/exerciseRepository");
-const { validateExercise, MUSCLE_GROUPS } = require("../utils/exerciseValidation");
+const { validateExercise, MUSCLE_GROUPS, EQUIPMENT_TYPES, DIFFICULTIES } = require("../utils/exerciseValidation");
 
 const router = express.Router();
 
@@ -23,8 +23,30 @@ router.get("/:id", (req, res, next) => {
 });
 
 router.get("/", (req, res, next) => {
+    const { muscleGroup, equipment, difficulty } = req.query;
+    
+    if (muscleGroup !== undefined && !MUSCLE_GROUPS.includes(muscleGroup)) {
+        return res.status(400).json({ error: "Invalid muscle group" });
+    }
+    if (equipment !== undefined && !EQUIPMENT_TYPES.includes(equipment)) {
+        return res.status(400).json({ error: "Invalid equipment type" });
+    }
+    if (difficulty !== undefined && !DIFFICULTIES.includes(difficulty)) {
+        return res.status(400).json({ error: "Invalid difficulty" });
+    }
+    
     try {
-        const exercises = repository.getAll();
+        let exercises = repository.getAll();
+        if (muscleGroup) {
+            exercises = exercises.filter(ex => ex.muscleGroup === muscleGroup);
+        }
+        if (equipment) {
+            exercises = exercises.filter(ex => ex.equipment === equipment);
+        }
+        if (difficulty) {
+            exercises = exercises.filter(ex => ex.difficulty === difficulty);
+        }
+        
         res.status(200).json({ data: exercises });
     }
     catch (err) {
