@@ -49,5 +49,27 @@ router.post("/", (req, res, next) => {
     }
 });
 
+router.put("/:id", (req, res, next) => {
+    const id = Number(req.params.id);
+    if (!Number.isInteger(id)) {
+        return res.status(400).json({ error: "Invalid id" });
+    }
+    try {
+        const existing = repository.getById(id);
+        if (!existing) {
+            return res.status(404).json({ error: "Exercise not found" });
+        }
+        const { valid, errors, data } = validateExercise(req.body || {}, { partial: true });
+        if (!valid) {
+            return res.status(400).json({ errors }); 
+        }
+        const updated = repository.update(id, data);
+        res.status(200).json({ data: updated });
+    }
+    catch (err) {
+        next(err);
+    }
+});
+
 
 module.exports = router;

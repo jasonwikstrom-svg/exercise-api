@@ -59,5 +59,16 @@ function create(data) {
     return newExercise;
 }
 
+function update(id, data) {
+    const exercises = readAll();
+    const index = exercises.findIndex((ex) => ex.id === id);
+    if (index === -1) {
+        return null;
+    }
+    exercises[index] = { ...exercises[index], ...data, id };
+    writeAll(exercises);
+    return exercises[index];
+}
 
-module.exports = { getAll, getById, create, SEED_FILE };
+
+module.exports = { getAll, getById, create, update, SEED_FILE };
