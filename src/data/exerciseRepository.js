@@ -47,13 +47,13 @@ function getById(id) {
     return readAll().find((ex) => ex.id === id);
 }
 
-function getNextId() {
+function getNextId(exercises) {
     return exercises.reduce((maxId, ex) => Math.max(maxId, ex.id), 0) + 1;
 }
 
 function create(data) {
     const exercises = readAll();
-    const newExercise = { id: getNextId(), ...data };
+    const newExercise = { id: getNextId(exercises), ...data };
     exercises.push(newExercise);
     fs.writeFileSync(getDataFile(), JSON.stringify(exercises, null, 2), "utf-8");
     return newExercise;
